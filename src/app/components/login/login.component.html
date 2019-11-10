@@ -1,3 +1,7 @@
+<div *ngIf="loginForm.valid && !IsValid" class="alert alert-danger">
+    <p>Failed login attempt... please try again</p>
+</div>
+
 <form class="" [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
     <div class="form-group row">
         <label for="" class="col-2">Email</label>
@@ -13,7 +17,6 @@
     </div>
     <div class="form-group row">
         <button class="btn btn-outline-primary m-1" type="submit" [disabled]="!loginForm.valid">Submit</button>
-        <button class="btn btn-outline-warning m-1" type="reset" >Clear</button>
+        <button class="btn btn-outline-warning m-1" type="reset">Clear</button>
     </div>
-    Values : {{loginForm.value | json}}
 </form>

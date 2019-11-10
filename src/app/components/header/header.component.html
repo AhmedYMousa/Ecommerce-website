@@ -7,6 +7,9 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a routerLink="/login" class="nav-link">Login</a></li>
+        <li *ngIf="!checkLogin; else Logout" class="nav-item"><a routerLink="/login" class="nav-link">Login</a></li>
+        <ng-template #Logout>
+            <li class="nav-item"><a (click)="logOut()" role="button" href="#" class="nav-link">Logout</a></li>
+        </ng-template>
     </ul>
 </nav>

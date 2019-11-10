@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   IsValid: boolean;
   loginForm: FormGroup
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.IsValid = false;
+    this.IsValid = true;
     this.loginForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -22,11 +26,11 @@ export class LoginComponent implements OnInit {
   }
 
   OnSubmit() {
-    if (this.loginForm.controls.email.value == "ahmed@x.com"
-      && this.loginForm.controls.password.value == "123") {
-      localStorage.setItem("token", this.loginForm.controls.email.value);
+    let result = this.auth.Login(this.loginForm.value);
+    if (result) {
+      this.router.navigate(["/home"]);
     }
-
+    this.IsValid = false;
   }
 
 }
