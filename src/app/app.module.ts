@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './components/admin/admin.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductComponent,
     NotFoundComponent,
     LoginComponent,
+    AdminComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

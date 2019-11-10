@@ -6,13 +6,24 @@ import { ProductComponent } from './components/product/product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { from } from 'rxjs';
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
-  { path: "products/:id", component: ProductComponent, canActivate: [AuthGuard] },
+
   { path: "home", component: HomeComponent },
   { path: "login", component: LoginComponent },
-  { path: "**", component: NotFoundComponent }
+  {
+    path: "admin", component: AdminComponent, children:
+      [
+        { path: "products", component: ProductComponent },
+        { path: "products/:id", component: ProductDetailsComponent }
+      ]
+    , canActivate: [AuthGuard]
+  },
+  { path: "**", component: NotFoundComponent, data: { title: "404" } }
 ];
 @NgModule({
   exports: [RouterModule],
