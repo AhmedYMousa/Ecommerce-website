@@ -13,6 +13,9 @@ import { AuthGuard } from './auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
