@@ -1,3 +1,19 @@
-<h4>
-  product works!
-</h4>
+<div class="row mb-1">
+    <div class="col">
+        <button class="btn btn-primary">Add Product</button>
+    </div>
+</div>
+<div *ngIf="products" class="row">
+    <div *ngFor="let product of products" class="col-6 col-lg-4 mb-2">
+        <div class="card">
+            <img src="https://source.unsplash.com/260x200/?tech" class="card-image-top" />
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">{{product.description}}</p>
+                <a class="btn btn-outline-primary mr-1">Add to cart</a>
+                <span class="bg-light p-1">Price: {{product.price}}$</span>
+                <p> <a [routerLink]="['./',product.id]" class="card-link">Products details</a> </p>
+            </div>
+        </div>
+    </div>
+</div>

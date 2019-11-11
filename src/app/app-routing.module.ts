@@ -11,17 +11,18 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
 
-  { path: "home", component: HomeComponent, data: { animation: 'home' }  },
-  { path: "login", component: LoginComponent,data: { animation: 'login' } },
+  { path: "home", component: HomeComponent, data: { animation: 'home' } },
+  { path: "login", component: LoginComponent, data: { animation: 'comp' } },
   {
     // canActivate apply on the current component and it's children
     // canActivateChild only applies to the children .
     path: "admin", canActivate: [AuthGuard], component: AdminComponent,
     children:
       [
-        { path: "products", component: ProductComponent  },
+        { path: "products", component: ProductComponent },
         { path: "products/:id", component: ProductDetailsComponent }
       ],
+     data: { animation: "comp" }
   },
   { path: "**", component: NotFoundComponent, data: { title: "404" } }
 ];
