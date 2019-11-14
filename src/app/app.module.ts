@@ -14,8 +14,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProductService } from './services/product.service';
+import { RegisterComponent } from './components/register/register.component';
+import { TokenInterceptor } from './auth.interceptor';
 
-import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,14 +30,22 @@ import { from } from 'rxjs';
     LoginComponent,
     AdminComponent,
     ProductDetailsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, ProductService,
+    { // Add TokenInterceptor def.
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
