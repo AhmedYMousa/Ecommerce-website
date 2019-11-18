@@ -1,0 +1,13 @@
+.product-img{
+    max-width: 360px;
+    height: 260px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.btn-product {
+    padding: 3px;
+    cursor: pointer;
+}
+
+.btn-product:hover>.fa::before {
+    color: #ff6655;
+}

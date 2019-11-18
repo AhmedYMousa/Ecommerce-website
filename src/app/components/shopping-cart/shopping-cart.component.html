@@ -1,0 +1,24 @@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Qty</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items;let i = index">
+            <td>{{i}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <div class="item-qty">
+                    <button class="qty-btn qty-btn-dec" (click)="decreaseQty(i)"></button>
+                    <span class="bg-light"> {{item.qty}}</span>
+                    <button class="qty-btn qty-btn-inc" (click)="increaseQty(i)"></button>
+                </div>
+            </td>
+            <td>{{item.price * item.qty}}</td>
+        </tr>
+    </tbody>
+</table>

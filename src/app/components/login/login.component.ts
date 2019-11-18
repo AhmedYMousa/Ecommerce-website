@@ -26,11 +26,14 @@ export class LoginComponent implements OnInit {
   }
 
   OnSubmit() {
-    let result = this.auth.Login(this.loginForm.value);
-    if (result) {
-      this.router.navigate(["/home"]);
-    }
-    this.IsValid = false;
+    console.log(this.loginForm.value);
+    this.auth.Login(this.loginForm.value)
+      .subscribe(
+        res => {
+          localStorage.setItem("token", res);
+          this.router.navigate(["/home"]);
+        }
+      );
   }
 
 }

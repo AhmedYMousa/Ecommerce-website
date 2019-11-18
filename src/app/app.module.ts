@@ -18,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { RegisterComponent } from './components/register/register.component';
 import { TokenInterceptor } from './auth.interceptor';
+import { ShoppingCartModule } from './components/shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -30,21 +31,22 @@ import { TokenInterceptor } from './auth.interceptor';
     LoginComponent,
     AdminComponent,
     ProductDetailsComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
+    ShoppingCartModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthService, AuthGuard, ProductService,
-    { // Add TokenInterceptor def.
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    // { // Add TokenInterceptor def.
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })

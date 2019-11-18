@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: rgba(0,0,0,.02) !important;
+}
+
+.fa-envelope {
+    font-size: 12px;
+}
+
+.wrapper {
+    background-color: #fff;
+    box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+}

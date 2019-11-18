@@ -1,3 +1,9 @@
-<p>
-  product-details works!
-</p>
+<div class="card">
+  <img src="https://source.unsplash.com/400x300/?tech" class="card-image-top" />
+  <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <a class="btn btn-outline-primary mr-1">Add to cart</a>
+      <span class="bg-light p-1">Price: {{product.price}}$</span>
+  </div>
+</div>
