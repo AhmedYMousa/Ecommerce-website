@@ -14,11 +14,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.checkLogin.subscribe(res => this.checkLogin = res);
+    this.checkLogin = this.auth.IsLoggedIn();
   }
   logOut() {
     this.auth.Logout();
-    this.auth.IsLoggedIn(false);
     this.router.navigate(['/home']);
   }
 

@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     this.auth.Login(this.loginForm.value)
       .subscribe(
         res => {
-          this.auth.IsLoggedIn(true);
           localStorage.setItem("token", res);
           this.router.navigate(["/home"]);
         }
