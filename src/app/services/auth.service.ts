@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
@@ -14,7 +14,12 @@ const httpOptions = {
 export class AuthService {
   readonly BaseUrl = "https://localhost:5001/api/users";
 
-  constructor(private http: HttpClient) { }
+  private loginSource = new BehaviorSubject<boolean>(this.IsLoggedIn());
+  loginStatus = this.loginSource.asObservable();
+
+  constructor(private http: HttpClient) {
+
+  }
 
   Register(user): Observable<any> {
     return this.http.post(this.BaseUrl, user, httpOptions);
@@ -46,7 +51,7 @@ export class AuthService {
   };
 
   Logout() {
-    if (this.IsLoggedIn) {
+    if (this.IsLoggedIn()) {
       localStorage.removeItem("token");
     }
   }
@@ -54,5 +59,8 @@ export class AuthService {
   IsLoggedIn(): boolean {
     // !!localStorage.getItem("token") return boolean value using !!
     return !!localStorage.getItem("token");
+  }
+  changeLoginStatus(login: boolean) {
+    this.loginSource.next(login);
   }
 }
