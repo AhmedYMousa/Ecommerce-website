@@ -1,24 +1,34 @@
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Qty</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of items;let i = index">
-            <td>{{i}}</td>
-            <td>{{item.name}}</td>
-            <td>
-                <div class="item-qty">
-                    <button class="qty-btn qty-btn-dec" (click)="decreaseQty(i)"></button>
-                    <span class="bg-light"> {{item.qty}}</span>
-                    <button class="qty-btn qty-btn-inc" (click)="increaseQty(i)"></button>
-                </div>
-            </td>
-            <td>{{item.price * item.qty}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="col-10 offset-1">
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th><i class="fa fa-cogs"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items;let i = index">
+                <td>{{i}}</td>
+                <td>{{item.name}}</td>
+                <td>
+                    <div class="item-qty">
+                        <button class="btn btn-sm btn-outline-success qty-btn-dec" (click)="decreaseQty(i)">-</button>
+                        <span> {{item.qty}}</span>
+                        <button class="btn btn-sm btn-outline-warning qty-btn-inc" (click)="increaseQty(i)">+</button>
+                    </div>
+                </td>
+                <td>{{item.price * item.qty}}</td>
+                <td><span (click)="removeItem(i,$event)" class="remove-item">
+                        <i class="fa fa-trash"></i>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-right">Total: <strong>{{grandTotal() | currency}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

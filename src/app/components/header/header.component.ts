@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   checkLogin: boolean;
+  shoppingCartItems: number;
   constructor(private auth: AuthService, private router: Router) {
+    this.shoppingCartItems = JSON.parse(localStorage.getItem("items")).length;
   }
 
   ngOnInit() {
@@ -21,5 +23,6 @@ export class HeaderComponent implements OnInit {
     this.auth.Logout();
     this.router.navigate(['/home']);
   }
+
 
 }

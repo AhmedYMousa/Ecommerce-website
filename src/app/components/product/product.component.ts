@@ -27,9 +27,14 @@ export class ProductComponent implements OnInit, OnDestroy {
       err => console.log(err),
       () => console.log("Complete !!"));
   }
-  addToCart(productId) {
-    console.log(productId);
+  addToCart(name, price, qty) {
+    let shoppingItems = JSON.parse(localStorage.getItem("items"));
+    console.log(shoppingItems);
 
+    shoppingItems.push({ name, price, qty });
+    console.log(shoppingItems);
+
+    localStorage.setItem("items", JSON.stringify(shoppingItems));
   }
   viewProduct() {
     console.log("Clicked!!");
