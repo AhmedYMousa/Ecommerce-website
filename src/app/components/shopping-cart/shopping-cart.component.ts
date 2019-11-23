@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
 import { $ } from 'protractor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,13 +11,14 @@ import { $ } from 'protractor';
 export class ShoppingCartComponent implements OnInit {
   items: Item[];
   deleteItem: boolean;
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit() {
 
-    let shoppingItems = JSON.parse(localStorage.getItem("items"));
-    this.items = shoppingItems;
-    // localStorage.setItem("items", JSON.stringify(this.items));
+    let shoppingItems = localStorage.getItem("items");
+    if (shoppingItems != null) {
+      this.items = JSON.parse(shoppingItems);
+    }
   }
   addItem(item: Item) {
     this.items.push(item);
@@ -24,13 +26,15 @@ export class ShoppingCartComponent implements OnInit {
 
   }
   removeItem(index, event) {
-    console.log(event.target);
-    console.log(event.target.closest('tr'));
     let currentRow = event.target.closest('tr');
-    let parent = event.target.closest('tr').parentNode;
+    let parent = currentRow.parentNode;
     parent.removeChild(currentRow);
-    let arr = this.items.splice(index, 1);
-    localStorage.setItem("items",JSON.stringify(arr));
+    this.items.splice(index, 1);
+    if (this.items.length == 0) {
+      localStorage.removeItem("items");
+    } else {
+      localStorage.setItem("items", JSON.stringify(this.items));
+    }
   }
 
   decreaseQty(index) {
@@ -38,15 +42,16 @@ export class ShoppingCartComponent implements OnInit {
     if (curItem.qty > 1) {
       curItem.qty--;
     }
-    this.grandTotal();
   }
   increaseQty(index) {
     let curItem = this.items[index];
-    if (curItem.qty > 0) {
+    if (curItem.qty < 10) {
       curItem.qty++;
+    } else {
+      this.toastr.error("Exceed item max limit: 10");
     }
   }
   grandTotal(): number {
-    return this.items.reduce((total, item) => total += item.price, 0);
+    return this.items.reduce((total, item) => total += (item.price * item.qty), 0);
   }
 }

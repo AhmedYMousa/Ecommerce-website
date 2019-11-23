@@ -10,9 +10,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   checkLogin: boolean;
-  shoppingCartItems: number;
+  shoppingCartItems: number = 0;
   constructor(private auth: AuthService, private router: Router) {
-    this.shoppingCartItems = JSON.parse(localStorage.getItem("items")).length;
+    let shoppingItems = localStorage.getItem("items");
+    if (shoppingItems != null) {
+      this.shoppingCartItems = JSON.parse(shoppingItems).length;
+    }
+
   }
 
   ngOnInit() {

@@ -19,6 +19,7 @@ import { ProductService } from './services/product.service';
 import { RegisterComponent } from './components/register/register.component';
 import { TokenInterceptor } from './auth.interceptor';
 import { ShoppingCartModule } from './components/shopping-cart/shopping-cart.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,12 @@ import { ShoppingCartModule } from './components/shopping-cart/shopping-cart.mod
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      timeOut: 3000,
+      closeButton: true
+    }),
+    HttpClientModule
   ],
   providers: [AuthService, AuthGuard, ProductService,
     // { // Add TokenInterceptor def.
