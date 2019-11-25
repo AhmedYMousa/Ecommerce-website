@@ -6,27 +6,24 @@
                 <h5 class="card-title text-center">
                     <a [routerLink]="['./',product.id]" class="card-link text-black">{{product.name}}</a></h5>
                 <p class="text-center text-danger">{{product.price | currency}}</p>
-                <div class="input-group justify-content-center">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="btn-product" (click)="addToCart(product.name,product.price,1)">
-                                <i class="fa fa-shopping-cart"></i>
-                            </span>
-                        </div>
-                        <div class="input-group-text">
-                            <span class="btn-product" (click)="viewProduct()">
-                                <i class="fa fa-eye"></i>
-                            </span>
-                        </div>
-                        <div class="input-group-text">
-                            <span class="btn-product">
-                                <i class="fa fa-heart"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- <span class="bg-light p-1">Price: </span> -->
 
+                <div class="btn-group">
+
+                    <button class="btn btn-outline-success btn-product" (click)="addToCart(product.name,product.price,1)">
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
+
+
+                    <button class="btn btn-outline-info btn-product" (click)="viewProduct()">
+                        <i class="fa fa-eye"></i>
+                    </button>
+
+
+                    <button class="btn btn-outline-danger btn-product">
+                        <i class="fa fa-heart"></i>
+                    </button>
+
+                </div>
             </div>
         </div>
     </div>

@@ -1,13 +1,19 @@
-.product-img{
+.product-img {
     max-width: 360px;
     height: 260px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
+
 .btn-product {
-    padding: 3px;
-    cursor: pointer;
+    max-width: 45px;
+    max-height: 45px;
 }
 
-.btn-product:hover>.fa::before {
-    color: #ff6655;
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 135px;
+    margin: 0 auto;
 }

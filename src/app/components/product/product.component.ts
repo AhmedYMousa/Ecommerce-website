@@ -3,6 +3,7 @@ import { Product } from '../../models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ShoppingService } from 'src/app/services/shopping.service';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +15,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   products: Product[];
   @Input() product: Product;
   private subscription: Subscription;
-  constructor(private data: ProductService, private toastr: ToastrService) { }
+  constructor(private data: ProductService, private shopService: ShoppingService) { }
 
   ngOnInit() {
     // console.table(this.products);
@@ -22,23 +23,15 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   GetProducts() {
-    this.subscription = this.data.GetProducts().subscribe(res => {
-      this.products = res;
-    },
-      err => console.log(err),
-      () => console.log("Complete !!"));
+    this.subscription = this.data.GetProducts().subscribe(
+      res => this.products = res,
+      err => console.log(err)
+    );
   }
   addToCart(name, price, qty) {
-    debugger;
-    let shoppingItems = localStorage.getItem("items");
-    let items = [];
-    if (shoppingItems != null) {
-      items = JSON.parse(shoppingItems);
-    }
-
-    items.push({ name, price, qty });
-    localStorage.setItem("items", JSON.stringify(items));
-    this.toastr.success('Item added successfully', 'Success');
+    this.shopService.addToCart(name, price, qty);
+    let count = JSON.parse(localStorage.getItem("items")) != null ? JSON.parse(localStorage.getItem("items")).length : 0;
+    this.shopService.updateItemsCount(count);
   }
   viewProduct() {
     console.log("Clicked!!");
