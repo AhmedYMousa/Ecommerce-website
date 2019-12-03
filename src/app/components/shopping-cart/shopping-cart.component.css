@@ -8,27 +8,36 @@
 }
 
 .item-qty>span {
-    background-color: #63676a;
+    background-color: #dfdfdf;
     width: 50px;
     display: inline-block;
     text-align: center;
     border-radius: 5px;
     margin: 3px;
     height: 25px;
-    color: #fff;
+    color: #000;
 }
 
 .remove-item {
     display: flex;
     width: 30px;
     height: 30px;
-    background-color: var(--danger);
+    background-color: #fff;
     border-radius: 5px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border: 1px solid #f04858;
 }
 
 .remove-item>.fa-trash::before {
-    color: #fff;
+    color: var(--danger);
+}
+
+.remove-item:hover {
+    background-color: var(--danger);
+}
+
+.remove-item:hover>.fa-trash::before {
+    color: var(--white);
 }

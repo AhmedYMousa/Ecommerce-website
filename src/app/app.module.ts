@@ -20,6 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TokenInterceptor } from './auth.interceptor';
 import { ShoppingCartModule } from './components/shopping-cart/shopping-cart.module';
 import { ToastrModule } from 'ngx-toastr';
+import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     AdminComponent,
     ProductDetailsComponent,
-    RegisterComponent
+    RegisterComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

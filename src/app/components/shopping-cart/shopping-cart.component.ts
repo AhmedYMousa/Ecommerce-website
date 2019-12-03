@@ -3,11 +3,22 @@ import { Item } from '../../models/item';
 import { $ } from 'protractor';
 import { ToastrService } from 'ngx-toastr';
 import { ShoppingService } from 'src/app/services/shopping.service';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css']
+  styleUrls: ['./shopping-cart.component.css'],
+  animations: [
+    trigger('slideIn', [
+      transition(":enter", [
+        query("tbody > tr", [style({ transform: 'translateX(-150%)' })]),
+        query("tbody > tr", stagger('150ms', [
+          animate('600ms ease-in', style({ transform: 'translateX(0)' }))
+        ]))
+      ])
+    ])
+  ]
 })
 export class ShoppingCartComponent implements OnInit {
   items: Item[];
@@ -24,13 +35,13 @@ export class ShoppingCartComponent implements OnInit {
   removeItem(index, event) {
     let result = this.shopService.removeFromCart(index, event);
     if (result == null) {
-      this.toastr.error("Shopping cart is empty", "Remove Item");
+      this.toastr.error(null, "Shopping cart is empty");
       return;
     }
     let count = result.length;
     this.items = result;
     this.shopService.updateItemsCount(count);
-    this.toastr.success("Item removed successfully", "Remove Item");
+    this.toastr.success(null, "Item removed successfully");
   }
 
   decreaseQty(index) {
