@@ -21,6 +21,7 @@ import { TokenInterceptor } from './auth.interceptor';
 import { ShoppingCartModule } from './components/shopping-cart/shopping-cart.module';
 import { ToastrModule } from 'ngx-toastr';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -44,10 +45,11 @@ import { SpinnerComponent } from './components/shared/spinner/spinner.component'
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
-      timeOut: 3000,
+      timeOut: 2000,
       closeButton: true
     }),
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [AuthService, AuthGuard, ProductService,
     // { // Add TokenInterceptor def.

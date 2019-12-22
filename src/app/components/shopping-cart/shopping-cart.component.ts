@@ -1,23 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
-import { $ } from 'protractor';
 import { ToastrService } from 'ngx-toastr';
 import { ShoppingService } from 'src/app/services/shopping.service';
-import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { slideIn } from 'src/app/animations/animations';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css'],
   animations: [
-    trigger('slideIn', [
-      transition(":enter", [
-        query("tbody > tr", [style({ transform: 'translateX(-150%)' })]),
-        query("tbody > tr", stagger('150ms', [
-          animate('600ms ease-in', style({ transform: 'translateX(0)' }))
-        ]))
-      ])
-    ])
+    slideIn
   ]
 })
 export class ShoppingCartComponent implements OnInit {

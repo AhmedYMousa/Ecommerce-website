@@ -14,11 +14,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   products: Product[];
   @Input() product: Product;
   private subscription: Subscription;
-  display: string;
+  config: { itemsPerPage: number; currentPage: number; totalItems: any; };
   constructor(private data: ProductService, private shopService: ShoppingService) { }
 
   ngOnInit() {
-    this.display = "block";
     this.GetProducts();
   }
 
@@ -26,7 +25,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.subscription = this.data.GetProducts().subscribe(
       res => {
         this.products = res;
-        this.display = "none";
+        this.config = {
+          itemsPerPage: 10,
+          currentPage: 1,
+          totalItems: this.products.length
+        };
+
       },
       err => console.log(err)
     );
@@ -42,6 +46,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
 
 }

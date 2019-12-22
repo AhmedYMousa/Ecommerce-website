@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { slideInAnimation } from './animations/animations';
+import { routeAnimation } from './animations/animations';
 import { RouterOutlet } from '@angular/router';
 
 
@@ -7,11 +7,11 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [slideInAnimation]
+  animations: [routeAnimation]
 })
 export class AppComponent {
   title = 'ecomm';
-  
+
   getAnimationData(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }

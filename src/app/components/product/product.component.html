@@ -1,31 +1,33 @@
-<div *ngIf="products" class="row">
-    <div *ngFor="let product of products" class="col-6 col-lg-3 mb-2">
-        <div class="card">
-            <img src="../../../assets/{{product.image}}" class="card-image-top product-img" />
-            <div class="card-body">
-                <h5 class="card-title text-center">
-                    <a [routerLink]="['./',product.id]" class="card-link text-black">{{product.name}}</a></h5>
-                <p class="text-center text-danger">{{product.price | currency}}</p>
+   <div *ngIf="products" class="row">
+       <div *ngFor="let product of products| paginate:config" class="col-6 col-lg-3 mb-2">
+           <div class="card">
+               <img src="../../../assets/{{product.image}}" class="card-image-top product-img" />
+               <div class="card-body">
+                   <h5 class="card-title text-center">
+                       <a [routerLink]="['./',product.id]" class="card-link text-black">{{product.name}}</a></h5>
+                   <p class="text-center text-danger">{{product.price | currency}}</p>
 
-                <div class="btn-group">
+                   <div class="btn-group">
 
-                    <button class="btn btn-outline-success btn-product" (click)="addToCart(product.name,product.price,1)">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-
-
-                    <button class="btn btn-outline-info btn-product" [routerLink]="['./',product.id]">
-                        <i class="fa fa-eye"></i>
-                    </button>
+                       <button class="btn btn-outline-success btn-product" (click)="addToCart(product.name,product.price,1)">
+                           <i class="fa fa-shopping-cart"></i>
+                       </button>
 
 
-                    <button class="btn btn-outline-danger btn-product">
-                        <i class="fa fa-heart"></i>
-                    </button>
+                       <button class="btn btn-outline-info btn-product" [routerLink]="['./',product.id]">
+                           <i class="fa fa-eye"></i>
+                       </button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<app-spinner [style.display]="display"></app-spinner>
+
+                       <button class="btn btn-outline-danger btn-product">
+                           <i class="fa fa-heart"></i>
+                       </button>
+
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   <div class="text-right">
+       <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+   </div>
